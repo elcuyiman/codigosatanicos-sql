@@ -1,0 +1,207 @@
+select * from customers;
+#1. Agregar un nuevo cliente a la base de datos
+INSERT INTO customers (
+    customerNumber, customerName,
+    contactLastName, contactFirstName,
+    phone, addressLine1, addressLine2,
+    city, state, postalCode, country,
+    salesRepEmployeeNumber, creditLimit
+) VALUES (
+    5001, 'Tiendita ayayai',
+    'Ramírez', 'Mauricio',
+    '+56 9 1234 5678', 'Av. Siempre Viva 123', NULL,
+    'Iquique', 'Tarapacá', '1100000', 'Chile',
+    1370, 500000.00
+);
+
+#2. Registrar un nuevo pedido para un cliente
+INSERT INTO orders (
+    orderNumber, orderDate, requiredDate, shippedDate,
+    status, comments, customerNumber
+) VALUES (
+    10500, '2025-11-20', '2025-11-30', NULL,
+    'In Process', 'Pedido creado en laboratorio', 5001
+);
+
+
+#3. Añadir un nuevo producto al catálogo
+INSERT INTO products (
+    productCode, productName, productLine, productScale,
+    productVendor, productDescription,
+    quantityInStock, buyPrice, MSRP
+) VALUES (
+    'PZ_0002', 'Ferrari Edicion Sherk',
+    'Classic Cars', '1:18',
+    'Samurai Corp.', 'Figura de colección, pilar de la empresa.',
+    50, 25000.00, 39990.00
+);
+
+#4.	Registrar detalles específicos de un pedido, como la cantidad y el producto.
+INSERT INTO orderdetails (
+    orderNumber, productCode,
+    quantityOrdered, priceEach, orderLineNumber
+) VALUES (
+    10500, 'PZ_0001',
+    3, 39990.00, 1
+);
+
+#5.	Introducir una nueva línea de productos en la base de datos.
+INSERT INTO productlines (
+    productLine, textDescription, htmlDescription, image
+) VALUES (
+    'musica',
+    'linea de ventas de guitarras wolfsome.',
+    NULL,
+    NULL
+);
+
+#6.	Añadir un nuevo representante de ventas a la tabla de empleados.
+INSERT INTO employees (
+    employeeNumber, lastName, firstName,
+    extension, email, officeCode, reportsTo, jobTitle
+) VALUES (
+    2000, 'López', 'Carla',
+    'x2000', 'clopez@classicmodels.com', '1', 1002, 'Sales Rep'
+);
+
+#7.	Registrar una nueva oficina o sucursal en la base de datos. 
+INSERT INTO offices (
+    officeCode, city, phone,
+    addressLine1, addressLine2,
+    state, country, postalCode, territory
+) VALUES (
+    9, 'Iquique', '+56 57 2345678',
+    'Av. Costanera 456', NULL,
+    'Tarapacá', 'Chile', '1100000', 'S'
+);
+
+#8. Ingresar un nuevo pago realizado por un cliente
+INSERT INTO payments (
+    customerNumber, checkNumber, paymentDate, amount
+) VALUES (
+    5001, 'CH_20251120', '2025-11-20', 120000.00
+);
+
+#9. Añadir detalles adicionales a la dirección de un cliente existente
+UPDATE customers
+SET addressLine2 = 'Depto 302, Condominio Vista al Mar'
+WHERE customerNumber = 5001;
+
+#10. Registrar un nuevo fabricante o proveedor de productos
+INSERT INTO products (
+    productCode, productName, productLine, productScale,
+    productVendor, productDescription,
+    quantityInStock, buyPrice, MSRP
+) VALUES (
+    'PZ_0003', 'Figura Mecha Premium',
+    'Classic Cars', '1:24',
+    'Samurai Corp.', 'Robot gigante listo para decorar tu escritorio.',
+    20, 45000.00, 69990.00
+);
+
+#11.	Introducir un nuevo modelo de escala para un producto específico.
+UPDATE products
+SET productScale = '1:15'
+WHERE productCode = 'PZ_0001';
+
+#12. Añadir un nuevo código postal en la tabla de direcciones
+UPDATE customers
+SET postalCode = '1100001'
+WHERE customerNumber = 5001;
+
+#13. Registrar la fecha de envío para un pedido reciente
+UPDATE orders
+SET shippedDate = '2025-11-22',status= 'Shipped'
+WHERE orderNumber = 10500;
+
+
+#14. Introducir nuevos comentarios o notas para un pedido específico
+UPDATE orders
+SET comments = 'Cliente pidió empaquetado como regalo y envío urgente.'
+WHERE orderNumber = 10500;
+
+#15. Agregar un nuevo estado o provincia a la base de datos
+INSERT INTO customers (
+    customerNumber, customerName,
+    contactLastName, contactFirstName,
+    phone, addressLine1, city, ,
+    postalCode, country, salesRepEmployeeNumber, creditLimit
+) VALUES (
+    5002, 'Comercial Norte Limitada',
+    'Pérez', 'Andrés',
+    '+56 9 8765 4321', 'Ruta A-16 km 10',
+    'Alto Hospicio', 'Tarapacá',
+    '1180000', 'Chile', 2000, 300000.00
+);
+
+#16. Añadir una nueva ciudad a la base de datos
+INSERT INTO offices (
+    officeCode, city, phone,
+    addressLine1, addressLine2,
+    state, country, postalCode, territory
+) VALUES (
+    10, 'Antofagasta', '+56 55 2345678',
+    'Av. Costanera 999', NULL,
+    'Antofagasta', 'Chile', '1270000', 'ST'
+);
+
+#17. Registrar un nuevo contacto para un cliente existente
+UPDATE customers
+SET contactFirstName = 'Sebastián',
+    contactLastName  = 'Gómez'
+WHERE customerNumber = 5001;
+
+#18. Introducir un nuevo teléfono o medio de contacto para un cliente
+UPDATE customers
+SET phone = '+56 9 5555 6666'
+WHERE customerNumber = 5001;
+
+
+#19. Añadir una descripción detallada para un nuevo producto
+UPDATE products
+SET productDescription = 'Figara de edicion limitada con atrilujios incluidos y una tarjeta firmanda por arturo prat.'
+WHERE productCode = 'PZ_0002';
+
+#20. Registrar el precio sugerido de venta (MSRP) para un nuevo producto
+UPDATE products
+SET MSRP = 74990.00
+WHERE productCode = 'PZ_0002';
+
+#21. Introducir el precio de compra de un producto recién adquirido
+UPDATE products
+SET buyPrice = 40000.00
+WHERE productCode = 'PZ_0002';
+
+#22. Registrar el nivel actual de stock para un nuevo producto en el almacén
+UPDATE products
+SET quantityInStock = 35
+WHERE productCode = 'PZ_0002';
+
+#23. Añadir detalles sobre el tipo de moneda utilizada en un pago específico
+UPDATE payments
+SET checkNumber = 'CH_20251120_CLP'
+WHERE customerNumber = 5001
+  AND checkNumber    = 'CH_20251120';
+  
+  
+#24. Introducir información sobre una nueva promoción o descuento para un producto
+#:v
+#25. Registrar un nuevo canal de distribución para los productos
+#:v
+
+#26. Añadir una nueva categoría o tipo de cliente
+UPDATE customers
+SET customerName = 'Vende Humo'
+WHERE customerNumber = 5001;
+
+
+#27.	Registrar un nuevo método de envío para los pedidos.
+#:v
+#28.	Introducir detalles sobre un nuevo paquete o bundle de productos en oferta
+
+#29,30 :v
+
+select * from customers 
+where customerNumber = 5001;
+
+
